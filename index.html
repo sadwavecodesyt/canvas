@@ -86,7 +86,7 @@ button:active {
 
         function startDrawing(e) {
             isDrawing = true;
-            [lastX, lastY] = [e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop];
+            [lastX, lastY] = [e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top];
             e.preventDefault();
         }
 
@@ -94,11 +94,11 @@ button:active {
             if (!isDrawing) return;
             let x, y;
             if (e.type.startsWith('mouse')) {
-                x = e.clientX - canvas.offsetLeft;
-                y = e.clientY - canvas.offsetTop;
+                x = e.clientX - canvas.getBoundingClientRect().left;
+                y = e.clientY - canvas.getBoundingClientRect().top;
             } else if (e.type.startsWith('touch')) {
-                x = e.touches[0].clientX - canvas.offsetLeft;
-                y = e.touches[0].clientY - canvas.offsetTop;
+                x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+                y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
             }
             ctx.strokeStyle = isErasing ? '#ffffff' : colorPicker.value;
             ctx.lineWidth = lineSizeInput.value;
